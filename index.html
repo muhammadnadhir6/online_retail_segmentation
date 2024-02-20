@@ -1,0 +1,529 @@
+<!DOCTYPE HTML>
+<!--
+	Massively by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	
+	<head>
+		<title>Online Retail Segmentation</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper" class="fade-in">
+
+				<!-- Intro -->
+					<div id="intro"></div>
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul class="links">
+							<li><a href="https://muhammadnadhir6.github.io/main_page/index.html">About Me</a></li>
+							<li><a href="https://muhammadnadhir6.github.io/main_page/generic.html">Projects</a></li>
+							<li  class="active"><a href=#>Online Retail Segmentation</a></li>
+						</ul>
+						<ul class="icons">
+							<li><a href="https://www.linkedin.com/in/muhammad-nadhir6" target="_blank" class="icon brands fa-linkedin"><span class="label">Linkedin</span></a></li>
+							<li><a href="https://github.com/muhammadnadhir6" target="_blank" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Featured Post -->
+							<article class="post featured">
+								<header class="major">
+									<h1>Online Retail Segmentation</h1>
+								</header>
+								<header class="submajor">
+									<h2>Background</h2>
+								</header>
+								<header class="aboutme">
+									<a class="image main"><img src="images/crm.jpg" alt="" /></a>	
+									<p>Our company want to do Customer Relationship Management (CRM) and to make sure that its effective, we need 
+										to properly analyze all of the customers we have. We need to properly discover which customers are potential customers 
+										and which customers are a lost customers. The analysis we need to do are Exploratory Data Analysis (EDA), 
+										RFM Analysis, and Cohort Analysis so that we can analyze all relevant customer behaviors in dataset, segment them 
+										based on their last time purchase (Recency), how many did they make a purchase (Frequency), and purchase value (Monetary) 
+										scores. Lastly, with the help of that scores, we will be able to predict their behaviors to retain our customers by 
+										helping decision makers develop CRM programs.
+									</p>
+								</header>
+								<header class="submajor">
+									<h2>Project Summary</h2>
+									<h3>Goal</h3>
+								</header>
+								<header class="text">
+									<p>Our goal is to know our customer behaviors by doing RFM and cohort analysis.</p>
+								</header>
+								<header class="submajor">
+									<h3>Objectives</h3>
+								</header>
+								<header class="text">
+									<p>To find the most effective discount promotions that can be applied by our client, what we need to do in this project are :
+									<ul><li>Cleaning raw data using various method and make sure the data is feasible to analyze.</li>
+									<li>Conducting Exploratory Data Analysis (EDA) to get the market the market overview.</li>
+									<li>Conducting customer's RFM (Recency, Frequency, and Monetary) analysis.</li>
+									<li>Segmenting the customers based on their RFM score.</li>
+									<li>Conducting cohort analysis.</li>
+									<li>Concluding the analysis result with some recommendations in decision making.</li></ul></p>
+								</header>
+								<header class="submajor">
+									<h2>Dataset</h2>
+								</header>
+								<header class="text">	
+									<ul>
+									<li><h3>Customer Transactions</h3></li>
+									<p>Contains <b>540.000+ rows</b> of customers transaction from several countries. The columns are :
+									<ul><li><b>InvoiceNo:</b> Invoice number. Nominal, a 6-digit integral number uniquely assigned to each transaction. If this code starts with letter 'c', it indicates a cancellation.</li>
+									<li><b>StockCode:</b> Product (item) code. Nominal, a 5-digit integral number uniquely assigned to each distinct product.</li>
+									<li><b>Description:</b> Product (item) name. Nominal.</li>
+									<li><b>Quantity:</b> The quantities of each product (item) per transaction. Numeric.</li>
+									<li><b>InvoiceDate:</b> Invoice Date and time. Numeric, the day and time when each transaction was generated.</li>
+									<li><b>UnitPrice:</b> Unit price. Numeric, Product price per unit in sterling.</li>
+									<li><b>CustomerID:</b> Customer number. Nominal, a 5-digit integral number uniquely assigned to each customer.</li>
+									<li><b>Country:</b> Country name. Nominal, the name of the country where each customer resides.</li>
+									</ul></p>
+									<a href="https://drive.google.com/uc?export=download&id=1zdvWZZaIBqQQk6AlcqnfVuh_yOav7Tuy" target="_blank" class="button">Download Dataset</a>
+									</ul>
+								</header>
+								<header class="submajor">
+									<h2>Data Cleaning</h2>
+								</header>
+								<header class="text">
+									<p>We need to make sure the data is clean enough before analyzing the data to get unbiased analysis. The cleaning steps are :</p>
+									<ul>
+									<li><h3>Handle missing value</h3></li>
+									<p>
+										After running missing value check, there are <b>135080</b> missing rows on customer ID and <b>1454</b> missing rows on description column.
+										Then, further research is needed to decide what we need to do with rows with missing value. From the research, it turns out that 
+										rows with missing customer ids have identical values in the "gender", "age", and "income" columns. Therefore, for data consistency and to eliminate redundancy, rows with missing customer ids need to be removed from the dataset.
+									</p>
+									<script src="https://gist.github.com/muhammadnadhir6/1105688fbed77ed6dabaaf461170464e.js"></script>
+									<li><h3>Remove negative value</h3></li>
+									<p>
+										From the table decription above, we know that there are zero and negative values in "Quantity" and "UnitPrice" column.
+										The quantity column with negative value and has a letter "C" as the start of the InvoiceNo. are non-sales operations 
+										(cancellations, accounting entries, stock count entries, sales discount entries, out of use, etc).
+										The "D" in the "StockCode" column represents sales discounts, and the negative values in the "Quantity" column are a result of these discounts.
+										In the "StockCode" column, entries starting with "C" contain information related to transportation, as evident 
+										from the "Description". In the "StockCode" column, there are rows consisting only of numbers, as well as 
+										patterns such as "BANK CHARGES," "PADS," "POST," "M," "NUMBERC," "NUMBERA," and others. The 'M' values in the 
+										"StockCode" and the "Manual" values in the description do not represent a product. It is assumed that not a sale 
+										but it may be a payment type or method or cost.
+									</p>
+									<script src="https://gist.github.com/muhammadnadhir6/23fb4fd24c15412c8e30f3b782d2b9db.js"></script>
+								</header>
+								<header class="submajor">
+									<h2>EDA (Exploratory Data Analysis)</h2>
+									<h3>Top 10 Country With The Highest Total Revenue</h3>
+								</header>
+								<header class="text">
+									<p>
+										Before we start the data exploration, we need to make a column for total value per transaction that calculated from unit price and quantity.
+									</p>
+									<script src="https://gist.github.com/muhammadnadhir6/227e86550a7002d510d8b693745e2222.js"></script>
+									<a class="image fit"><img src="images/top10_revenue.png" alt="" /></a>
+									<p>As we can see from the plot, it is proven that the highest revenue belongs to United Kingdom. 
+										We can't clearly see the difference between the other countries as UK revenue is incompararably higher than the other countries.</p>
+								</header>
+								<header class="submajor">
+									<h3>Top 10 Country Without UK With The Highest Total Revenue</h3>
+								</header>
+								<header class="text">
+									<p>##Top 10 Country Without UK With The Highest Total Revenue
+										To clearly see the difference between countries other than UK, we need to make the plot again without UK to see 
+										more precisely the difference between the countries.</p>
+									<script src="https://gist.github.com/muhammadnadhir6/a50f4088a83c0af75c2b6f0e95161686.js"></script>
+									<a class="image fit"><img src="images/top10_withoutUK.png" alt="" /></a>
+									<p>
+										There is not much difference in revenue beetween Netherland, EIRE/Ireland, Germany, and France. Then there is
+										a huge difference between France and Australia. There is also a slight difference between the 6th and 7th place which are
+										Spain and Switzerland and the 8th, 9th, and 10th place which are Belgium, Sweden, and Japan.
+								</header>
+								<header class="submajor">
+									<h3>Top 10 Customer Percentage</h3>
+								</header>
+								<header class="text">
+									<script src="https://gist.github.com/muhammadnadhir6/2c34a219c4d85bfec806c6af07968333.js"></script>
+									<a class="image fit"><img src="images/customer_percentage.png" alt="" /></a>
+									<p>
+										Although the country rank in the top 10 country with the highest customer count is not exactly the same as the top 10 country
+										with the highest revenue, the United Kingdom still hold the first place with an incompararably higher customer count than the
+										other countries.
+									</p>
+								</header>
+								<header class="submajor">
+									<h3>Top 10 Revenue Percentage</h3>
+								</header>
+								<header class="text">
+									<script src="https://gist.github.com/muhammadnadhir6/068fc494b9682b8d8b4622cc31b3af5b.js"></script>
+									<a class="image fit"><img src="images/revenue_percentage.png" alt="" /></a>
+									<p>
+										Based on the result above, it is better to focus on the United Kingdom market for RFM and Cohort analysis, 
+										as it comprises 92,6% of the dataset's customers and 84,7% of the total revenue. This choice most likely to 
+										give more consistent results.
+									</p>
+								</header>
+								<header class="submajor">
+									<h2>Exploring United Kingdom Market</h2>
+								</header>
+								<header class="text">
+									<p>Here are the general overview of United Kingdom data table.</p>
+									<script src="https://gist.github.com/muhammadnadhir6/cc65966cc0b59cc58aec685dbeec10a5.js"></script>
+								</header>
+								<header class="submajor">
+									<h3>Top 10 Most Popular Product in UK</h3>
+								</header>
+								<header class="text">
+									<p>We will find the most popular product in UK by comparing how much each item was sold.</p>
+									<script src="https://gist.github.com/muhammadnadhir6/c6dc5a36467e9168722d27aee31ae490.js"></script>
+									<a class="image fit"><img src="images/popular_product.png" alt="" /></a>
+									<p>
+										As item with the cheapest price, PAPER CRAFT , LITTLE BIRDIE is the most popular product in UK market with 
+										80.995 products sold.
+									</p>
+								</header>
+								<header class="submajor">
+									<h3>Top 10 Products by Total Revenue</h3>
+								</header>
+								<header class="text">
+									<script src="https://gist.github.com/muhammadnadhir6/9145e6daa67b35166cb9e820e568e784.js"></script>
+									<a class="image fit"><img src="images/product_by_revenue.png" alt="" /></a>
+									<p>
+										It is proven that PAPER CRAFT , LITTLE BIRDIE also became a product with the highest total revenue despite
+										its cheap price compared to the other products.
+									</p>
+								</header>
+								<header class="submajor">
+									<h3>Gender Percentage</h3>
+								</header>
+								<header class="text">
+									<script src="https://gist.github.com/muhammadnadhir6/976364278d1e7818bbd284b33f7be1d2.js"></script>
+									<a class="image fit"><img src="images/gender_percentage.png" alt="" /></a>
+									<p>
+										There is a huge difference in gender percentage where female customers almost twice as many as male customers.
+									</p>
+								</header>
+								<header class="submajor">
+									<h3>Total Revenue by Gender</h3>
+								</header>
+								<header class="text">
+									<script src="https://gist.github.com/muhammadnadhir6/646a1be0116e2578d3a47dbcb3f88a9c.js"></script>
+									<a class="image fit"><img src="images/revenue_by_gender.png" alt="" /></a>
+									<p>
+										The plot is similar to gender percentage plot so it means that there is not much difference between male and females purchase value.
+									</p>
+								</header>
+								<header class="submajor">
+									<h3>Age Segmentation</h3>
+								</header>
+								<header class="text">
+									<script src="https://gist.github.com/muhammadnadhir6/4060e117947d5c94727e27a595eca8e8.js"></script>
+									<a class="image fit"><img src="images/age_segmentation.png" alt="" /></a>
+									<p>
+										Among the three group of age, the majority of the customers are aged 30-54. There are not much elderly customers
+										as it is the smallest age group in the market.
+									</p>
+								</header>
+								<header class="submajor">
+									<h3>Sales by Month</h3>
+								</header>
+								<header class="text">
+									<script src="https://gist.github.com/muhammadnadhir6/4060e117947d5c94727e27a595eca8e8.js"></script>
+									<a class="image fit"><img src="images/sales_by_count.png" alt="" /></a>
+									<a class="image fit"><img src="images/sales_by_revenue.png" alt="" /></a>
+									<p>
+										There is not much difference between sales count and sales revenue per month except that there are some month 
+										where the sales count was increased but the sales revenue was decreased instead which are happened in January 
+										2011 and July 2011. Yearly sustainable growth has been reached and highest Sales performance occurred at November 2011.
+									</p>
+								</header>
+								<header class="submajor">
+									<h2>RFM Analysis</h2>
+								</header>
+								<header class="text">
+									<a class="image submain"><img src="images/RFM.png" alt="" /></a>
+									<p>
+										In the age of the internet and e-commerce, companies that do not expand their businesses online or 
+										utilize digital tools to reach their customers will run into issues like scalability and a lack of digital 
+										precsence. An important marketing strategy e-commerce businesses use for analyzing and predicting customer 
+										value is customer segmentation. Customer data is used to sort customers into group based on their behaviors 
+										and preferences.
+									</br>
+									</br>
+										Recency, Frequency, Monetary Value (RFM), also known as RFM analysis, is a type of customer segmentation 
+										and behavioral targeting used to help businesses rank and segment customers based on the recency, frequency, 
+										and monetary value of a transaction.
+									<ul>
+										<li>RECENCY (R) : Time since the last purchase</li>
+										<li>FREQUENCY (F) : Total number of purchases</li>
+										<li>MONETARY (M) : Total purchase value</li>
+									</ul>
+									</p>
+								</header>
+								<header class="submajor">
+									<h3>Benefits of RFM Analysis</h3>
+								</header>
+								<header class="text">
+									<p>
+									<ul>
+										<li>Recognize our most valuable customers</li>
+										<li>Find out potential customers</li>
+										<li>Increase revenue</li>
+										<li>Increase customer retention</li>
+										<li>Learn more about the trends and behaviors of our customers</li>
+										<li>Find out customers that are at risk</li>
+									</ul>
+									</p>
+								</header>
+								<header class="submajor">
+									<h3>Calculating RFM</h3>
+								</header>
+								<header class="text">
+									<p>
+										The first thing we need to do is calculating RFM of each customer. Recency calculated from day difference between
+										customer's last purchase and reference date. Reference date is one day after the last purchase date. Frequency
+										calculated from each customer purchase count and monetary calculated from the total purchase value of each
+										customer.
+									</p>
+									<script src="https://gist.github.com/muhammadnadhir6/30c6c1ee7e1196528a1e437bdd7f264a.js"></script>
+								</header>
+								<header class="submajor">
+									<h3>Calculating RFM Score</h3>
+								</header>
+								<header class="text">
+									<p>
+										The simplest way to create customer segments from an RFM model is by using quartiles. We will assign a score 
+										from 1 to 4 to each category (Recency, Frequency, and Monetary) with 4 being the highest/best value. 
+										The final RFM score is calculated by combining all RFM values. Then we will use the final RFM score for customer segmentation.
+										Here are the segmentation :
+										<ul>
+											<li>
+												<b>Recency (R) :</b>
+											</br>If Recency value is equal or less than 18, then the Recency score is 4 
+											</br>If Recency value is between 18 and 51, then the Recency score is 3 
+											</br>If Recency value is between 51 and 143, then the Recency score is 2 
+											</br>If Recency value is more than 143, then the Recency score is 1
+											</li>
+											<li>
+												<b>Frequency (F) :</b>
+											</br>If Frequency value is equal or more than 10, then the Frequency score is 4 
+											</br>If Frequency value is between 10 and 5, then the Frequency score is 3 
+											</br>If Frequency value is between 5 and 2, then the Frequency score is 2 
+											</br>If Frequency value is 1, then the Frequency score is 1
+											</li>
+											<li>
+												<b>Monetary (M) :</b>
+											</br>If Monetary value is equal or more than 1576.585, then the Monetary score is 4 
+											</br>If Monetary value is between 1576.585 and 652.280, then the Monetary score is 3 
+											</br>If Monetary value is between 652.280 and 300.280, then the Monetary score is 2 
+											</br>If Monetary value is less than 300.280, then the Monetary score is 1
+											</li>
+										</ul>
+									</p>
+									<script src="https://gist.github.com/muhammadnadhir6/882169c185d8a6c5f82c5be264dbfa41.js"></script>
+								</header>
+								<header class="submajor">
+									<h3>RFM Score Distribution</h3>
+								</header>
+								<header class="text">
+									<script src="https://gist.github.com/muhammadnadhir6/ea202260b0d3330c09dfa94659d795fc.js"></script>
+									<a class="image fit"><img src="images/rfm_score_distribution.png" alt="" /></a>
+									<p>Most of the customers have RFM score of 111, which means that the have purchased only once in 144 or more days ago with transaction value less than 300.280.</p>
+									<a class="image fit"><img src="images/recency_distribution.png" alt="" /></a>
+									<p>According to the pie chart, customers recency score are almost evenly distributed.</p>
+									<a class="image fit"><img src="images/frequency_distribution.png" alt="" /></a>
+									<p>Most of the customers did a purchase 2-4 times, 34.4% did a purchase only once, 16.9% did a purchase 5-9 times, and the rest did a purchase more than 10 times.</p>
+									<a class="image fit"><img src="images/monetary_distribution.png" alt="" /></a>
+									<p>Monetary scores appear to be evenly distributed.</p>
+								</header>
+								<header class="submajor">
+									<h3>RFM Segmentation</h3>
+								</header>
+								<header class="text">
+									<p><ul><li>According to the Recency score, customers with a score of 1 are defined as a lost customer, customers with a score of 2 and 3 are defined as an old customer, and customers with a score of 4 are defined as a new customer.</li>
+									<li>According to the Frequency score, customers with a score of 1 and 2 are defined as a normal customer, and customers with a score of 3 and 4 are defined as a regular customer.</li>
+									<li>According to the Monetary score, customers with a score of 1 and 2 are defined as a normal customer, and customers with a score of 3 and 4 are defined as a top spent customer.</li>
+									<li>Lastly, customers with a score of 4 in all aspect are defined as noble customer.</li></ul></p>
+									<script src="https://gist.github.com/muhammadnadhir6/089e5b6307ddb31ce6c1c04f6fb3c666.js"></script>
+									<a class="image fit"><img src="images/segmentation_distribution.png" alt="" /></a>
+									<a class="image fit"><img src="images/segmentation_pecentage.png" alt="" /></a>
+									<p>Most of the customers or around 24.9% is a lost customer which mean they made a purchase at least 144 days 
+										ago. Among all customers, only 7 of them are new regular customers which mean they made a purchase 1 day ago. 
+										Lastly, we found out that 6.6% of the customers are a noble customer which means they have a high purchase 
+										value from frequent purchases and the last time they made a purchase was 1 day ago.</p>
+								</header>
+								<header class="submajor">
+									<h2>Cohort Analysis</h2>
+								</header>
+								<header class="text">
+									<a class="image submain"><img src="images/cohort_analysis.png" alt="" /></a>
+									<p>
+										Cohort analysis involves grouping customers together based on shared characteristics or behaviors and then 
+										analyzing their behavior over time. The purpose of Cohort Analysis is to understand how different groups of 
+										customers behave or respond to certain events or changes. Cohorts are typically defined by a common 
+										attribute or characteristic, such as the month of customer acquisition or a specific marketing campaign. 
+										By tracking and comparing the behavior of different cohorts, businesses can gain insights into customer 
+										retention, engagement, and other key metrics.
+									</p>
+									<p>
+									</br>
+										Cohort Analysis is specifically useful in analyzing user growth patterns for products. In terms of a product, 
+										a cohort can be a group of people with the same sign-up date, the same usage starts month/date, or the 
+										same traffic source. Cohort analysis is an analytics method by which these groups can be tracked over time 
+										for finding key insights. This analysis can further be used to do customer segmentation and track metrics 
+										like retention, churn, and lifetime value.
+									</p>
+								</header>
+								<header class="submajor">
+									<h3>Benefits of Cohort Analysis</h3>
+								</header>
+								<header class="text">
+									<p>
+									<ul>
+										<li>Find out the effectiveness of a marketing campaign in a particular time</li>
+										<li>Find out the best strategy to maintain customers</li>
+										<li>Find out the best marketing chanel that would bring the best result</li>
+										<li>Learn more about the trends and behaviors of our customers</li>
+									</ul>
+									</p>
+								</header>
+								<header class="submajor">
+									<h3>Making Cohort Index</h3>
+								</header>
+								<header class="text">
+									<p>
+										What we need to do first is making cohort index using first transaction dates. The number of cohort index
+										is equal to the number of date. That first purchase count in each month will be the standard to measure 
+										retention rate from the next months until the last month.
+									</p>
+									<script src="https://gist.github.com/muhammadnadhir6/af03074a3984ca0450acaa3ea749c5f5.js"></script>
+								</header>
+								<header class="submajor">
+									<h3>Retention Rate</h3>
+								</header>
+								<header class="text">
+									<p>
+										Retention rate is the percentage of customers who continue to use our service or product over a 
+										predetermined period. It's an important metric, especially for subscription-based businesses, as it shows 
+										the numer of existing customers compared to total customers in the early period. In this research, we will
+										see month to month customer retention rate. Started with new customer count in each date then we will compared
+										the amount in the next month.
+									</p>
+									<script src="https://gist.github.com/muhammadnadhir6/8e52bd2c150d5f5fd1008f7bee1d726c.js"></script>
+									<a class="image fit"><img src="images/customer_retention.png" alt="" /></a>
+									<p>As we can see, there is already a significant decrease of customer in the second month after each first purchase date, 
+										although the number of customers in the next months tends to be stable. Some even experience an increase as happened
+										in November 2011 or twelfth month after December 2010, which increased to 50%.
+									</p>
+									<a class="image fit"><img src="images/retention_rate.png" alt="" /></a>
+									<p>Although there was some decline in average retention rate in each index, the retention rate tends to increase compared to the
+										early period.</p>
+								</header>
+								<header class="submajor">
+									<h3>Retention Rate by Gender</h3>
+								</header>
+								<header class="text">
+									<script src="https://gist.github.com/muhammadnadhir6/a5c964f4e926968e60c6575e9c13239e.js"></script>
+									<a class="image fit"><img src="images/retention_by_gender.png" alt="" /></a>
+									<p>It shows that both female and male groups have similar retention trends. It means that there is no significant 
+										relationship between gender and customers retention.
+									</p>
+								</header>
+								<header class="submajor">
+									<h3>Retention Rate by Age</h3>
+								</header>
+								<header class="text">
+									<p><ul>
+										<li>Customer with age 15-29 defined as a Young Customer</li>
+										<li>Customer with age 30-54 defined as a Mid-age Customer</li>
+										<li>Customer with age higher than 55 defined as an Old Customer</li>
+
+									</ul></p>
+									<script src="https://gist.github.com/muhammadnadhir6/a60f4323e6a3075dd6b623a9e23ef6a4.js"></script>
+									<a class="image fit"><img src="images/retention_by_age.png" alt="" /></a>
+									<p>There is no much difference of retention rate between every age group.
+									</p>
+								</header>
+								<header class="submajor">
+									<h2>Recommendation</h2>
+								</header>
+								<header class="text">
+									<p>
+										Based on the result we got from the analysis, there are some recommendation that can help us upgrade our
+										business in maintaining better relationship with our customer, reach our potential customer, and carry out a 
+										better customer based marketing strategies.
+									<ul>
+										<li>
+											According to RFM Analysis, 24,9% or the majority of customers is a lost customer which means that they made a 
+											purchase at least 144 days ago. The best thing that we can do for them is actively advertising some products
+											through app notification or message app marketing. It is better if the product is a popular product or a product
+											related to prior purchases. We could also make a special discount voucher for this customer segment.
+										</li>
+										<li>
+											The second largest customer segment is an old customer which means that the last time they made a purchase are
+											18-143 days ago. These customers can also be categorized as cusomers at risk. We can maintain them by 
+											actively advertising some products through app notification or message app marketing and giving them
+											time limited discount voucher.
+										</li>
+										<li>
+											For top spent and noble customer regardless of their last purchase, we can give them discount voucher with 
+											minimum purchase or a discount for second or third product that they purchase. We can also give them cashback for
+											a expensive products to maintain their loyalty to our retail.
+										</li>
+										<li>
+											According to cohort analysis, there is a consistent decline in the retention rates of newly acquired customers.
+											It means that we need to gain more loyalty from our entire customers. Our recommendation is to make a point system
+											where the customer gain a certain points every time they make a purchase. The points can be used to either get a
+											discount voucher or some grand prize.
+										</li>
+									</ul></p>
+								</header>
+							</article>
+					</div>
+
+					<!-- Footer -->
+					<footer id="footer">
+						<section class="split contact">
+							<section>
+								<h3>Phone</h3>
+								<p>0822-4701-9258</p>
+							</section>
+							<section>
+								<h3>Email</h3>
+								<p>muhammadnadhir6@gmail.com</p>
+							</section>
+							<section>
+								<h3>Social</h3>
+								<ul class="icons alt">
+									<li><a href="https://www.linkedin.com/in/muhammad-nadhir6" target="_blank" class="icon brands alt fa-linkedin"><span class="label">Linkedin</span></a></li>
+									<li><a href="https://github.com/muhammadnadhir6" target="_blank" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+								</ul>
+							</section>
+						</section>
+					</footer>
+
+				<!-- Copyright -->
+					<div id="copyright">
+						<ul><li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
+					</div>
+
+			</div>
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+	</body>
+</html>
